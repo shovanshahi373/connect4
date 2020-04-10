@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Connect 4</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Baloo+Paaji+2:wght@500&family=Luckiest+Guy&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>Connect 4</h1>
+    <div class="input-fields">
+      <label for="">
+        <div>Player 1:</div>
+        <!-- <br /> -->
+        <input
+          type="text"
+          data-pid="1"
+          name=""
+          value="player #1"
+          class="playerName"
+        />
+      </label>
+
+      <label for="#board-size-selector">
+        <div>Choose Board:</div>
+        <select class="board-size" id="board-size-selector">
+          <option value="" selected disabled>Choose board</option>
+          <option value="7X6">7 X 6</option>
+          <option value="8X7">8 X 7</option>
+        </select>
+      </label>
+
+      <label for="">
+        <div>Player 2:</div>
+        <input
+          type="text"
+          data-pid="2"
+          name=""
+          value="player #2"
+          class="playerName"
+        />
+      </label>
+    </div>
+
+    <div class="board"></div>
+    <footer class="footer">
+      The goal of this game is to align exactly 4 consecutive pieces. The first
+      player who achieves this wins the game.
+    </footer>
+    <!-- <audio src="./audio/chipFalling.mp3" controls class="myAudio"></audio> -->
+    <audio src="./assets/audio/insert.wav" class="myAudio"></audio>
+    <script src="./script.js"></script>
+  </body>
+</html>
