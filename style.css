@@ -75,6 +75,47 @@ body {
   align-items: center;
 }
 
+.after-game {
+  display: none;
+  text-align: center;
+}
+
+.player-turn {
+  transition: scale 0.2s;
+  animation-name: breathe;
+  animation-duration: 0.8s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-direction: alternate;
+}
+
+@keyframes breathe {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.1);
+  }
+}
+
+.btn {
+  border: none;
+  transition: transform 0.3s;
+  border-radius: 3px;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.btn:hover {
+  transform: scale(1.1);
+}
+
+.btn.btn-restart {
+  background-color: orangered;
+}
+
 .input-fields > * {
   margin: 0 20px;
   text-align: center;

@@ -2,6 +2,10 @@ const audio = document.querySelector(".myAudio");
 const board = document.querySelector(".board");
 const boardSize = document.querySelector(".board-size");
 const players = document.querySelectorAll(".playerName");
+const winner = document.querySelector(".winner");
+const displayMsg = document.querySelector(".after-game");
+const restart = document.querySelector(".btn-restart");
+const pturn = document.querySelector(".player-turn");
 // initializations
 let turn;
 let cells;
@@ -31,6 +35,7 @@ function clickHandler() {
   ) {
     audio.currentTime = 0;
     audio.play();
+
     const card = document.createElement("div");
     const val = -(50 + 100 * targetRow);
     card.style.transform = `translate(-50%,${val}%)`;
@@ -42,34 +47,39 @@ function clickHandler() {
     this.appendChild(card);
     if (turn === "1") {
       card.style.backgroundColor = "red";
+
       this.setAttribute("data-taggedBy", "1");
       if (checkForWin.call(this, "1"))
         return setTimeout(() => gameComplete(p1Name), 1000);
       if (checkColumn.call(this, "1"))
-        return setTimeout(() => gameComplete(p2Name), 1000);
+        return setTimeout(() => gameComplete(p1Name), 1000);
       if (checkDiagonalLeft.call(this, "1"))
-        return setTimeout(() => gameComplete(p2Name), 1000);
+        return setTimeout(() => gameComplete(p1Name), 1000);
       if (checkDiagonalRight.call(this, "1"))
-        return setTimeout(() => gameComplete(p2Name), 1000);
+        return setTimeout(() => gameComplete(p1Name), 1000);
       turn = "2";
+      pturn.textContent = `turn of ${p2Name}`;
+      pturn.style.color = "blue";
     } else {
       card.style.backgroundColor = "blue";
       this.setAttribute("data-taggedBy", "2");
       if (checkForWin.call(this, "2"))
-        return setTimeout(() => gameComplete(2), 1000);
+        return setTimeout(() => gameComplete(p2Name), 1000);
       if (checkColumn.call(this, "2"))
-        return setTimeout(() => gameComplete(2), 1000);
+        return setTimeout(() => gameComplete(p2Name), 1000);
       if (checkDiagonalLeft.call(this, "2"))
-        return setTimeout(() => gameComplete(2), 1000);
+        return setTimeout(() => gameComplete(p2Name), 1000);
       if (checkDiagonalRight.call(this, "2"))
-        return setTimeout(() => gameComplete(2), 1000);
+        return setTimeout(() => gameComplete(p2Name), 1000);
       turn = "1";
+      pturn.textContent = `turn of ${p1Name}`;
+      pturn.style.color = "red";
     }
   }
 }
 
 function gameComplete(name) {
-  alert(`the game is won by ${name}!`);
+  alert(`the winner is ${name}!`);
   id = null;
   board.style.pointerEvents = "none";
   board.style.backgroundColor = "rgba(255,255,255,0.3)";
@@ -77,7 +87,12 @@ function gameComplete(name) {
   board.style.borderTopRightRadius = "3vw";
   board.style.borderBottomLeftRadius = "3vw";
   board.style.borderBottomRightRadius = "3vw";
+  displayMsg.style.display = "block";
+  winner.textContent = `Winner is ${name}!`;
+  pturn.textContent = "";
 }
+
+restart.addEventListener("click", () => createBoard(rows, columns));
 
 function checkForWin(player) {
   return [...this.parentElement.children].some((child1) => {
@@ -264,6 +279,19 @@ function checkDiagonalRight(player) {
 }
 
 function createBoard(rows, cols) {
+  console.log("me is called");
+  coltotal = 1;
+  total = 1;
+  diaglefttotal = 1;
+  diagrighttotal = 1;
+  board.style.pointerEvents = "unset";
+  board.style.backgroundColor = "transparent";
+  board.style.borderTopLeftRadius = "unset";
+  board.style.borderTopRightRadius = "unset";
+  board.style.borderBottomLeftRadius = "unset";
+  board.style.borderBottomRightRadius = "unset";
+
+  displayMsg.style.display = "none";
   k = -1;
   board.children &&
     [...board.children].forEach((node) => board.removeChild(node));
@@ -288,6 +316,8 @@ function createBoard(rows, cols) {
     }
     board.appendChild(rowField);
   }
+  turn = player1;
+  cells = [...document.querySelectorAll(".cell")];
 }
 
 players[0].addEventListener("change", (e) => {
@@ -298,22 +328,10 @@ players[1].addEventListener("change", (e) => {
 });
 
 boardSize.addEventListener("change", (e) => {
-  coltotal = 1;
-  total = 1;
-  diaglefttotal = 1;
-  diagrighttotal = 1;
-  board.style.pointerEvents = "unset";
-  board.style.backgroundColor = "transparent";
-  board.style.borderTopLeftRadius = "unset";
-  board.style.borderTopRightRadius = "unset";
-  board.style.borderBottomLeftRadius = "unset";
-  board.style.borderBottomRightRadius = "unset";
   // const players = document.querySelectorAll(".playerName");
   player1 = players[0].dataset.pid;
   player2 = players[1].dataset.pid;
   rows = +e.target.value.split("X")[0];
   columns = +e.target.value.split("X")[1];
   if (player1 && player2) createBoard(rows, columns);
-  turn = player1;
-  cells = [...document.querySelectorAll(".cell")];
 });
