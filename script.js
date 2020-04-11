@@ -198,9 +198,8 @@ function checkDiagonalRight(player) {
   const tid = +this.dataset.id;
   const topLeftMostSlot = 0;
   const bottomRightMostSlot = rows * columns - 1;
-  console.log(topLeftMostSlot);
-  console.log(bottomRightMostSlot);
-
+  // console.log(topLeftMostSlot);
+  // console.log(bottomRightMostSlot);
   if (
     //top right 6 slots
     tid === topLeftMostSlot ||
@@ -244,7 +243,7 @@ function checkDiagonalRight(player) {
     decreasingRowIndex -= 1;
     decreasingIndex += 1;
   }
-  console.log(diagArr);
+  // console.log(diagArr);
   return (
     diagArr
       // .sort((c1, c2) => +c1.dataset.id - +c2.dataset.id)
