@@ -22,9 +22,10 @@ function clickHandler() {
   const targetID = +this.getAttribute("data-id") + columns;
   const targetRow = +this.parentElement.dataset.row;
   if (
-    cells[targetID] &&
-    cells[targetID].classList.contains("taken") &&
-    !this.classList.contains("taken")
+    (this.classList.contains("bottom") && !this.classList.contains("taken")) ||
+    (cells[targetID] &&
+      cells[targetID].classList.contains("taken") &&
+      !this.classList.contains("taken"))
   ) {
     audio.currentTime = 0;
     audio.play();
@@ -126,7 +127,7 @@ function createBoard(rows, cols) {
       cell.classList.add("cell");
       cell.setAttribute("data-id", k);
       cell.addEventListener("click", clickHandler);
-      if (i === rows - 1) cell.classList.add("taken");
+      if (i === rows - 1) cell.classList.add("bottom");
       if (i === 0 && j === 0) cell.style.borderTopLeftRadius = "23px";
       if (i === 0 && j === cols - 1) cell.style.borderTopRightRadius = "23px";
       if (i === rows - 1 && j === 0) cell.style.borderBottomLeftRadius = "23px";
