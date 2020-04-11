@@ -128,11 +128,11 @@ function createBoard(rows, cols) {
       cell.setAttribute("data-id", k);
       cell.addEventListener("click", clickHandler);
       if (i === rows - 1) cell.classList.add("bottom");
-      if (i === 0 && j === 0) cell.style.borderTopLeftRadius = "23px";
-      if (i === 0 && j === cols - 1) cell.style.borderTopRightRadius = "23px";
-      if (i === rows - 1 && j === 0) cell.style.borderBottomLeftRadius = "23px";
+      if (i === 0 && j === 0) cell.style.borderTopLeftRadius = "3vw";
+      if (i === 0 && j === cols - 1) cell.style.borderTopRightRadius = "3vw";
+      if (i === rows - 1 && j === 0) cell.style.borderBottomLeftRadius = "3vw";
       if (i === rows - 1 && j === cols - 1)
-        cell.style.borderBottomRightRadius = "23px";
+        cell.style.borderBottomRightRadius = "3vw";
       // cells.push(cell);
       rowField.appendChild(cell);
     }
@@ -141,10 +141,10 @@ function createBoard(rows, cols) {
 }
 
 players[0].addEventListener("change", (e) => {
-  p1Name = e.target.value;
+  p1Name = e.target.value.trim().replace(/\s/g, "");
 });
 players[1].addEventListener("change", (e) => {
-  p2Name = e.target.value;
+  p2Name = e.target.value.trim().replace(/\s/g, "");
 });
 
 boardSize.addEventListener("change", (e) => {
