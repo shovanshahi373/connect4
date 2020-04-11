@@ -236,7 +236,7 @@ function checkDiagonalRight(player) {
   const diagArr = [];
   const currentRowIndex = +this.parentElement.dataset.row;
   diagArr.push(this);
-  console.log("current row index is " + currentRowIndex);
+  // console.log("current row index is " + currentRowIndex);
 
   let increasingRowIndex = currentRowIndex + 1;
   let increasingIndex = tid + (columns - 1);
@@ -279,7 +279,7 @@ function checkDiagonalRight(player) {
 }
 
 function createBoard(rows, cols) {
-  console.log("me is called");
+  // console.log("me is called");
   coltotal = 1;
   total = 1;
   diaglefttotal = 1;
